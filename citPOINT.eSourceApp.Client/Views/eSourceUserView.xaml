@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="citPOINT.eSourceApp.Client.eSourceUserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d"
+             d:DesignHeight="600"
+             d:DesignWidth="400"
+             MinWidth="400"
+             xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+             xmlns:eNegControls="clr-namespace:citPOINT.eNeg.Common;assembly=citPOINT.eNeg.Common"
+             KeyDown="UserControl_KeyDown">
+
+    <Grid x:Name="LayoutRoot"
+          Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+
+        <eNegControls:eNegMessageControl Grid.Column="0"
+                                         Grid.ColumnSpan="2"
+                                         Grid.Row="0"
+                                         x:Name="uxSPSucessMessage"
+                                         Opacity="1"
+                                         Height="30"
+                                         MessageType="Error"
+                                         Visibility="Collapsed"
+                                         HorizontalAlignment="Center"
+                                         MessageText="Creation Faild.User data must be unique." />
+
+        <TextBlock Grid.Row="1"
+                   HorizontalAlignment="Left"
+                   Margin="5"
+                   Text="User Name"
+                   VerticalAlignment="Top" />
+
+        <TextBox Grid.Column="1"
+                 Grid.Row="1"
+                 Margin="3"
+                 Text="{Binding Path=CurrenteSourceUser.UserName, Mode=TwoWay, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                 Name="uxtxtUserName"
+                 TabIndex="0" />
+
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="5"
+                   Text="Password"
+                   VerticalAlignment="Top"
+                   Grid.Row="2" />
+
+        <PasswordBox   Grid.Column="1"
+                       Grid.Row="2"
+                       Margin="3"
+                       x:Name="uxtxtPassword"
+                       Password="{Binding Path=CurrenteSourceUser.Password, Mode=TwoWay, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                       TabIndex="1" />
+
+        <!--Email address-->
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="5"
+                   Grid.Row="3"
+                   Text="E-mail" />
+        <TextBox Margin="3"
+                 Name="uxtxtEmail"
+                 Grid.Column="1"
+                 Text="{Binding Path=CurrenteSourceUser.Email, Mode=TwoWay, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                 Grid.Row="3"
+                 TabIndex="2" />
+
+        <!--First Name-->
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="5"
+                   Grid.Row="4"
+                   Text="First Name" />
+        <TextBox Margin="3"
+                 Name="uxtxtFirstName"
+                 Grid.Column="1"
+                 Text="{Binding Path=CurrenteSourceUser.FirstName, Mode=TwoWay, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                 Grid.Row="4"
+                 TabIndex="3" />
+
+        <!--Last Name-->
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="5"
+                   Grid.Row="5"
+                   Text="Last Name" />
+        <TextBox Margin="3"
+                 Name="uxtxtLastName"
+                 Grid.Column="1"
+                 Text="{Binding Path=CurrenteSourceUser.LastName, Mode=TwoWay, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                 Grid.Row="5"
+                 TabIndex="4" />
+
+
+        <!--Last Name-->
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="5"
+                   Grid.Row="6"
+                   Text="Company" />
+        <TextBox Margin="3"
+                 Name="uxtxtCompanyName"
+                 Grid.Column="1"
+                 Text="{Binding Path=CurrenteSourceUser.Company, Mode=TwoWay, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                 Grid.Row="6"
+                 TabIndex="5" />
+
+
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="5"
+                   Grid.Row="7"
+                   Text="Gender" />
+
+        <Border   Grid.Column="1"
+                  Margin="3"
+                  Grid.Row="7"
+                  BorderThickness="1"
+                  BorderBrush="#DA617583">
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center">
+                <RadioButton x:Name="uxcbx_Gender_Male"
+                             Content="Male"
+                             Margin="2"
+                             IsChecked="{Binding Path=CurrenteSourceUser.IsMale, Mode=TwoWay,  ValidatesOnExceptions=True, NotifyOnValidationError=True}"
+                             TabIndex="5" />
+
+                <RadioButton Margin="2"
+                             x:Name="uxcbx_Gender_Female"
+                             Content="Female"
+                             IsChecked="{Binding Path=CurrenteSourceUser.IsFemale, Mode=TwoWay,  ValidatesOnExceptions=True, NotifyOnValidationError=True}"
+                             TabIndex="6" />
+            </StackPanel>
+        </Border>
+
+        <telerik:RadBusyIndicator Grid.Row="8"
+                                  Grid.ColumnSpan="2"
+                                  HorizontalAlignment="Center"
+                                  BusyContent="Please wait..."
+                                  IsBusy="{Binding IsCreatingUserBusy,FallbackValue=True}" />
+
+        <telerik:RadButton Content="Create eSource user"
+                           Grid.Column="1"
+                           Grid.Row="9"
+                           HorizontalAlignment="Left"
+                           Margin="0"
+                           Name="uxcmdCreateeSourceUser"
+                           VerticalAlignment="Center"
+                           Height="30"
+                           Width="200"
+                           Command="{Binding CreateeSourceUserCommand}"
+                           TabIndex="7" />
+    </Grid>
+</UserControl>

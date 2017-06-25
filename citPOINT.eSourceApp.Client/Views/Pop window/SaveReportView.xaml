@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="citPOINT.eSourceApp.Client.SaveReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d"
+             MaxHeight="140"
+             MaxWidth="200">
+
+    <Grid x:Name="LayoutRoot"
+          Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60*" />
+            <RowDefinition Height="40*" />
+        </Grid.RowDefinitions>
+        <telerik:RadButton Content="Save Report"
+                Height="30"
+                HorizontalAlignment="Center"
+                Margin="10"
+                Name="uxbtnSaveReport"
+                VerticalAlignment="Top"
+                Width="100"
+                Command="{Binding SaveDownloadReportCommand}"
+                Grid.Row="1" />
+        <TextBlock Margin="10"
+                   VerticalAlignment="Top"
+                   TextWrapping="Wrap"
+                   Text="The report now are ready to save.Please click save to save it on your pc." />
+    </Grid>
+</UserControl>

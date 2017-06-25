@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="getServerTime">
+        <s:complexType />
+      </s:element>
+      <s:element name="getServerTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="getServerTimeResult" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="testMEthod">
+        <s:complexType />
+      </s:element>
+      <s:element name="testMEthodResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="testMEthodResult" type="tns:QueryParameters" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="QueryParameters">
+        <s:restriction base="s:string">
+          <s:enumeration value="BidID" />
+          <s:enumeration value="Type" />
+          <s:enumeration value="WSCall" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="createUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="company" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="gender" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="createUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="createUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestUserLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestUserLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestUserLoginResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateTender">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="command" type="tns:ObjectType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="ObjectType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Tender" />
+          <s:enumeration value="Auction" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="CreateTenderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateTenderResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bidID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="type" type="tns:ObjectType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getReportResult" type="tns:ReportInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ReportInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="downloadName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="binaryData" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getTenders">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bidIDs" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getTendersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getTendersResult" type="tns:ArrayOfTenderInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTenderInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TenderInfo" nillable="true" type="tns:TenderInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TenderInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="bidID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="endTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="type" type="tns:ObjectType" />
+          <s:element minOccurs="1" maxOccurs="1" name="published" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isclosed" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getServerTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:getServerTime" />
+  </wsdl:message>
+  <wsdl:message name="getServerTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:getServerTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="testMEthodSoapIn">
+    <wsdl:part name="parameters" element="tns:testMEthod" />
+  </wsdl:message>
+  <wsdl:message name="testMEthodSoapOut">
+    <wsdl:part name="parameters" element="tns:testMEthodResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="createUserSoapIn">
+    <wsdl:part name="parameters" element="tns:createUser" />
+  </wsdl:message>
+  <wsdl:message name="createUserSoapOut">
+    <wsdl:part name="parameters" element="tns:createUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestUserLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:TestUserLogin" />
+  </wsdl:message>
+  <wsdl:message name="TestUserLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:TestUserLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateTenderSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateTender" />
+  </wsdl:message>
+  <wsdl:message name="CreateTenderSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateTenderResponse" />
+  </wsdl:message>
+  <wsdl:message name="getReportSoapIn">
+    <wsdl:part name="parameters" element="tns:getReport" />
+  </wsdl:message>
+  <wsdl:message name="getReportSoapOut">
+    <wsdl:part name="parameters" element="tns:getReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="getTendersSoapIn">
+    <wsdl:part name="parameters" element="tns:getTenders" />
+  </wsdl:message>
+  <wsdl:message name="getTendersSoapOut">
+    <wsdl:part name="parameters" element="tns:getTendersResponse" />
+  </wsdl:message>
+  <wsdl:portType name="eSourceAppSoap">
+    <wsdl:operation name="getServerTime">
+      <wsdl:input message="tns:getServerTimeSoapIn" />
+      <wsdl:output message="tns:getServerTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="testMEthod">
+      <wsdl:input message="tns:testMEthodSoapIn" />
+      <wsdl:output message="tns:testMEthodSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="createUser">
+      <wsdl:input message="tns:createUserSoapIn" />
+      <wsdl:output message="tns:createUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestUserLogin">
+      <wsdl:input message="tns:TestUserLoginSoapIn" />
+      <wsdl:output message="tns:TestUserLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTender">
+      <wsdl:input message="tns:CreateTenderSoapIn" />
+      <wsdl:output message="tns:CreateTenderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getReport">
+      <wsdl:input message="tns:getReportSoapIn" />
+      <wsdl:output message="tns:getReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getTenders">
+      <wsdl:input message="tns:getTendersSoapIn" />
+      <wsdl:output message="tns:getTendersSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="eSourceAppSoap" type="tns:eSourceAppSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getServerTime">
+      <soap:operation soapAction="http://tempuri.org/getServerTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testMEthod">
+      <soap:operation soapAction="http://tempuri.org/testMEthod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createUser">
+      <soap:operation soapAction="http://tempuri.org/createUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestUserLogin">
+      <soap:operation soapAction="http://tempuri.org/TestUserLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTender">
+      <soap:operation soapAction="http://tempuri.org/CreateTender" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReport">
+      <soap:operation soapAction="http://tempuri.org/getReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTenders">
+      <soap:operation soapAction="http://tempuri.org/getTenders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="eSourceAppSoap12" type="tns:eSourceAppSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getServerTime">
+      <soap12:operation soapAction="http://tempuri.org/getServerTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testMEthod">
+      <soap12:operation soapAction="http://tempuri.org/testMEthod" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createUser">
+      <soap12:operation soapAction="http://tempuri.org/createUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestUserLogin">
+      <soap12:operation soapAction="http://tempuri.org/TestUserLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTender">
+      <soap12:operation soapAction="http://tempuri.org/CreateTender" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReport">
+      <soap12:operation soapAction="http://tempuri.org/getReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTenders">
+      <soap12:operation soapAction="http://tempuri.org/getTenders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="eSourceApp">
+    <wsdl:port name="eSourceAppSoap" binding="tns:eSourceAppSoap">
+      <soap:address location="https://design.negpoint-test.com/WebServices/eNeg/eSourceApp.asmx" />
+    </wsdl:port>
+    <wsdl:port name="eSourceAppSoap12" binding="tns:eSourceAppSoap12">
+      <soap12:address location="https://design.negpoint-test.com/WebServices/eNeg/eSourceApp.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

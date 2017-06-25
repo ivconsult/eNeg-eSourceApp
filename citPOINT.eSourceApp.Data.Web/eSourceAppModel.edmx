@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="eSourceAppModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="eSourceAppModelStoreContainer">
+          <EntitySet Name="NegotiationBid" EntityType="eSourceAppModel.Store.NegotiationBid" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserMapping" EntityType="eSourceAppModel.Store.UserMapping" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Negotiati__eNegU__0519C6AF" Association="eSourceAppModel.Store.FK__Negotiati__eNegU__0519C6AF">
+            <End Role="UserMapping" EntitySet="UserMapping" />
+            <End Role="NegotiationBid" EntitySet="NegotiationBid" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="NegotiationBid">
+          <Key>
+            <PropertyRef Name="NegotiationBidID" />
+          </Key>
+          <Property Name="NegotiationBidID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NegotiationID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BidID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsClosed" Type="bit" />
+          <Property Name="eNegUserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="DeletedBy" Type="uniqueidentifier" />
+          <Property Name="DeletedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserMapping">
+          <Key>
+            <PropertyRef Name="eNegUserID" />
+          </Key>
+          <Property Name="eNegUserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="eSourceUserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="DeletedBy" Type="uniqueidentifier" />
+          <Property Name="DeletedOn" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__Negotiati__eNegU__0519C6AF">
+          <End Role="UserMapping" Type="eSourceAppModel.Store.UserMapping" Multiplicity="1" />
+          <End Role="NegotiationBid" Type="eSourceAppModel.Store.NegotiationBid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMapping">
+              <PropertyRef Name="eNegUserID" />
+            </Principal>
+            <Dependent Role="NegotiationBid">
+              <PropertyRef Name="eNegUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="uspNegotiationBidDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NegotiationBidID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="uspNegotiationBidInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NegotiationBidID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="NegotiationID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="BidID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="IsClosed" Type="bit" Mode="In" />
+          <Parameter Name="eNegUserID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Deleted" Type="bit" Mode="In" />
+          <Parameter Name="DeletedBy" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="DeletedOn" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="uspNegotiationBidSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NegotiationBidID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="uspNegotiationBidUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NegotiationBidID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="NegotiationID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="BidID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="IsClosed" Type="bit" Mode="In" />
+          <Parameter Name="eNegUserID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Deleted" Type="bit" Mode="In" />
+          <Parameter Name="DeletedBy" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="DeletedOn" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="uspUserMappingDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eNegUserID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="uspUserMappingInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eNegUserID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="eSourceUserID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Deleted" Type="bit" Mode="In" />
+          <Parameter Name="DeletedBy" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="DeletedOn" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="uspUserMappingSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eNegUserID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="uspUserMappingUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eNegUserID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="eSourceUserID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Deleted" Type="bit" Mode="In" />
+          <Parameter Name="DeletedBy" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="DeletedOn" Type="datetime" Mode="In" />
+        </Function>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="eSourceAppModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="eSourceAppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="NegotiationBids" EntityType="eSourceAppModel.NegotiationBid" />
+          <EntitySet Name="UserMappings" EntityType="eSourceAppModel.UserMapping" />
+          <AssociationSet Name="FK__Negotiati__eNegU__0519C6AF" Association="eSourceAppModel.FK__Negotiati__eNegU__0519C6AF">
+            <End Role="UserMapping" EntitySet="UserMappings" />
+            <End Role="NegotiationBid" EntitySet="NegotiationBids" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="NegotiationBid">
+          <Key>
+            <PropertyRef Name="NegotiationBidID" />
+          </Key>
+          <Property Name="NegotiationBidID" Type="Guid" Nullable="false" />
+          <Property Name="NegotiationID" Type="Guid" Nullable="false" />
+          <Property Name="BidID" Type="Guid" Nullable="false" />
+          <Property Name="IsClosed" Type="Boolean" />
+          <Property Name="eNegUserID" Type="Guid" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" />
+          <Property Name="DeletedBy" Type="Guid" />
+          <Property Name="DeletedOn" Type="DateTime" />
+          <NavigationProperty Name="UserMapping" Relationship="eSourceAppModel.FK__Negotiati__eNegU__0519C6AF" FromRole="NegotiationBid" ToRole="UserMapping" />
+        </EntityType>
+        <EntityType Name="UserMapping">
+          <Key>
+            <PropertyRef Name="eNegUserID" />
+          </Key>
+          <Property Name="eNegUserID" Type="Guid" Nullable="false" />
+          <Property Name="eSourceUserID" Type="Guid" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" />
+          <Property Name="DeletedBy" Type="Guid" />
+          <Property Name="DeletedOn" Type="DateTime" />
+          <NavigationProperty Name="NegotiationBids" Relationship="eSourceAppModel.FK__Negotiati__eNegU__0519C6AF" FromRole="UserMapping" ToRole="NegotiationBid" />
+        </EntityType>
+        <Association Name="FK__Negotiati__eNegU__0519C6AF">
+          <End Role="UserMapping" Type="eSourceAppModel.UserMapping" Multiplicity="1" />
+          <End Role="NegotiationBid" Type="eSourceAppModel.NegotiationBid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMapping">
+              <PropertyRef Name="eNegUserID" />
+            </Principal>
+            <Dependent Role="NegotiationBid">
+              <PropertyRef Name="eNegUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="eSourceAppModelStoreContainer" CdmEntityContainer="eSourceAppEntities">
+          <EntitySetMapping Name="NegotiationBids"><EntityTypeMapping TypeName="eSourceAppModel.NegotiationBid"><MappingFragment StoreEntitySet="NegotiationBid">
+            <ScalarProperty Name="NegotiationBidID" ColumnName="NegotiationBidID" />
+            <ScalarProperty Name="NegotiationID" ColumnName="NegotiationID" />
+            <ScalarProperty Name="BidID" ColumnName="BidID" />
+            <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+            <ScalarProperty Name="eNegUserID" ColumnName="eNegUserID" />
+            <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+            <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+            <ScalarProperty Name="DeletedOn" ColumnName="DeletedOn" />
+          </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="eSourceAppModel.NegotiationBid">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="eSourceAppModel.Store.uspNegotiationBidInsert">
+                  <ScalarProperty Name="DeletedOn" ParameterName="DeletedOn" />
+                  <ScalarProperty Name="DeletedBy" ParameterName="DeletedBy" />
+                  <ScalarProperty Name="Deleted" ParameterName="Deleted" />
+                  <ScalarProperty Name="eNegUserID" ParameterName="eNegUserID" />
+                  <ScalarProperty Name="IsClosed" ParameterName="IsClosed" />
+                  <ScalarProperty Name="BidID" ParameterName="BidID" />
+                  <ScalarProperty Name="NegotiationID" ParameterName="NegotiationID" />
+                  <ScalarProperty Name="NegotiationBidID" ParameterName="NegotiationBidID" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="eSourceAppModel.Store.uspNegotiationBidUpdate">
+                  <ScalarProperty Name="DeletedOn" ParameterName="DeletedOn" Version="Current" />
+                  <ScalarProperty Name="DeletedBy" ParameterName="DeletedBy" Version="Current" />
+                  <ScalarProperty Name="Deleted" ParameterName="Deleted" Version="Current" />
+                  <ScalarProperty Name="eNegUserID" ParameterName="eNegUserID" Version="Current" />
+                  <ScalarProperty Name="IsClosed" ParameterName="IsClosed" Version="Current" />
+                  <ScalarProperty Name="BidID" ParameterName="BidID" Version="Current" />
+                  <ScalarProperty Name="NegotiationID" ParameterName="NegotiationID" Version="Current" />
+                  <ScalarProperty Name="NegotiationBidID" ParameterName="NegotiationBidID" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="eSourceAppModel.Store.uspNegotiationBidDelete">
+                  <ScalarProperty Name="NegotiationBidID" ParameterName="NegotiationBidID" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="UserMappings"><EntityTypeMapping TypeName="eSourceAppModel.UserMapping"><MappingFragment StoreEntitySet="UserMapping">
+            <ScalarProperty Name="eNegUserID" ColumnName="eNegUserID" />
+            <ScalarProperty Name="eSourceUserID" ColumnName="eSourceUserID" />
+            <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+            <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+            <ScalarProperty Name="DeletedOn" ColumnName="DeletedOn" />
+          </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="eSourceAppModel.UserMapping">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="eSourceAppModel.Store.uspUserMappingInsert">
+                  <ScalarProperty Name="DeletedOn" ParameterName="DeletedOn" />
+                  <ScalarProperty Name="DeletedBy" ParameterName="DeletedBy" />
+                  <ScalarProperty Name="Deleted" ParameterName="Deleted" />
+                  <ScalarProperty Name="eSourceUserID" ParameterName="eSourceUserID" />
+                  <ScalarProperty Name="eNegUserID" ParameterName="eNegUserID" />
+                </InsertFunction>
+                <DeleteFunction FunctionName="eSourceAppModel.Store.uspUserMappingDelete">
+                  <ScalarProperty Name="eNegUserID" ParameterName="eNegUserID" />
+                </DeleteFunction>
+                <UpdateFunction FunctionName="eSourceAppModel.Store.uspUserMappingUpdate">
+                  <ScalarProperty Name="DeletedOn" ParameterName="DeletedOn" Version="Current" />
+                  <ScalarProperty Name="DeletedBy" ParameterName="DeletedBy" Version="Current" />
+                  <ScalarProperty Name="Deleted" ParameterName="Deleted" Version="Current" />
+                  <ScalarProperty Name="eSourceUserID" ParameterName="eSourceUserID" Version="Current" />
+                  <ScalarProperty Name="eNegUserID" ParameterName="eNegUserID" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="eSourceAppModel">
+        <EntityTypeShape EntityType="eSourceAppModel.NegotiationBid" Width="1.5" PointX="3" PointY="1" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="eSourceAppModel.UserMapping" Width="1.5" PointX="0.75" PointY="1.25" Height="2.1725878906249996" IsExpanded="true" />
+        <AssociationConnector Association="eSourceAppModel.FK__Negotiati__eNegU__0519C6AF" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.3362939453125" />
+          <ConnectorPoint PointX="3" PointY="2.3362939453125" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

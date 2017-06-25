@@ -1,0 +1,147 @@
+﻿<UserControl x:Class="citPOINT.eSourceApp.Client.BidsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             MinWidth="500"
+             MaxWidth="500"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:my="clr-namespace:citPOINT.eNeg.Common;assembly=citPOINT.eNeg.Common">
+
+    <Grid x:Name="LayoutRoot"
+          Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38*" />
+            <RowDefinition Height="57*" />
+            <RowDefinition Height="205*" />
+        </Grid.RowDefinitions>
+
+        <telerik:RadButton Content="eSource"
+                Name="uxbtnOpeneSource"
+                Command="{Binding NavigateToeSourceCommand}"
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="5"
+                Height="30" />
+
+        <telerik:RadButton Content="Start RFx"
+                Name="uxbtnStartTender"
+                Command="{Binding CreateBidCommand}"
+                CommandParameter="Tender"
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="5"
+                Height="30" />
+
+        <telerik:RadButton Content="Start Auction"
+                Name="uxbtnStartAuction"
+                Command="{Binding CreateBidCommand}"
+                CommandParameter="Auction"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="5"
+                Height="30" />
+
+
+        <telerik:RadGridView Grid.Row="3"
+                             VerticalAlignment="Top"
+                             AutoGenerateColumns="False"
+                             BorderBrush="Black"
+                             BorderThickness="1"
+                             CanUserDeleteRows="False"
+                             CanUserInsertRows="False"
+                             GridLinesVisibility="Both"
+                             IsFilteringAllowed="False"
+                             ItemsSource="{Binding TendersSource, Mode=TwoWay}"
+                             Name="uxGrdTenders"
+                             ReorderColumnsMode="None"
+                             RowIndicatorVisibility="Collapsed"
+                             ShowColumnHeaders="True"
+                             SelectionMode="Single"
+                             ShowGroupPanel="False"
+                             Grid.ColumnSpan="3">
+            <telerik:RadGridView.Columns>
+
+                <telerik:GridViewColumn Header="Type"
+                                        IsReorderable="False"
+                                        IsResizable="True"
+                                        UniqueName="TypeShortCut"
+                                        Width="Auto">
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding TypeShortCut}"
+                                       TextWrapping="Wrap"
+                                       FontWeight="Bold" />
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+
+                <telerik:GridViewColumn Header="Name"
+                                        IsReorderable="False"
+                                        IsResizable="True"
+                                        UniqueName="name"
+                                        MinWidth="250"
+                                        MaxWidth="300"
+                                        >
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <HyperlinkButton Name="uxlnkOpenTender" CommandParameter="{Binding}" Click="uxlnkOpenTender_Click" >
+                                <TextBlock Text="{Binding name}"
+                                       TextWrapping="Wrap"   />
+                            </HyperlinkButton>
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+
+                <telerik:GridViewColumn Header="End Date"
+                                        IsReorderable="False"
+                                        IsResizable="True"
+                                        UniqueName="endTime"
+                                        Width="90">
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding endTime,StringFormat='dd.MM.yyyy'}" />
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+
+
+                <telerik:GridViewColumn Header="Report"
+                                        IsReorderable="False"
+                                        IsResizable="True"
+                                        UniqueName="LinkCaption"
+                                        Width="*">
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <HyperlinkButton  Content="{Binding LinkCaption}"
+                                              IsEnabled="{Binding ShowReport}"
+                                              Name="uxlnkDownloadReport"
+                                              Click="uxlnkDownloadReport_Click"
+                                              CommandParameter="{Binding}"
+                                              />
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+        
+        <my:eNegMessageControl Grid.ColumnSpan="3"
+                               Height="30"
+                               HorizontalAlignment="Center"
+                               Margin="5"
+                               MessageText="Process fialed"
+                               MessageType="Error"
+                               Name="uxSPSucessMessage"
+                               Opacity="1"
+                               Visibility="Collapsed" />
+    </Grid>
+</UserControl>

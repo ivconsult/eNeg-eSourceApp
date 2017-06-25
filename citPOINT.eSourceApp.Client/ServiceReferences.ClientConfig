@@ -1,0 +1,20 @@
+﻿<configuration>
+  <system.serviceModel>
+    <bindings>
+      <basicHttpBinding>
+        <binding name="eSourceAppSoap"
+                 maxBufferSize="2147483647"
+                 maxReceivedMessageSize="2147483647">
+          <security mode="None" />
+        </binding>
+      </basicHttpBinding>
+    </bindings>
+    <client>
+      <endpoint address="http://eneg.negpoint-test.com:10010/WebServices/eNeg/eSourceApp.asmx"
+                binding="basicHttpBinding"
+                bindingConfiguration="eSourceAppSoap"
+                contract="eSource.eSourceAppSoap"
+                name="eSourceAppSoap" />
+    </client>
+  </system.serviceModel>
+</configuration>
